@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        var springData = google.visualization.arrayToDataTable([
+          ['Artist', 'Listens'],
+          {% for s in spring %}['{{ s.name }}', {{ s.count }}],
+          {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Spring',
+          pieSliceText: 'label',
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('spring-piechart'));
+        chart.draw(springData, options);
+
+        var summerData = google.visualization.arrayToDataTable([
+          ['Artist', 'Listens'],
+          {% for s in summer %}['{{ s.name }}', {{ s.count }}],
+          {% endfor %}
+        ]);
+
+        options['title'] = 'Summer';
+
+        var chart = new google.visualization.PieChart(document.getElementById('summer-piechart'));
+        chart.draw(summerData, options);
+
+        var fallData = google.visualization.arrayToDataTable([
+          ['Artist', 'Listens'],
+          {% for s in fall %}['{{ s.name }}', {{ s.count }}],
+          {% endfor %}
+        ]);
+
+        options['title'] = 'Fall';
+
+        var chart = new google.visualization.PieChart(document.getElementById('fall-piechart'));
+        chart.draw(fallData, options);
+
+        var winterData = google.visualization.arrayToDataTable([
+          ['Artist', 'Listens'],
+          {% for s in winter %}['{{ s.name }}', {{ s.count }}],
+          {% endfor %}
+        ]);
+
+        options['title'] = 'Winter';
+
+        var chart = new google.visualization.PieChart(document.getElementById('winter-piechart'));
+        chart.draw(winterData, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <div id="spring-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
+      <div id="summer-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
+    </div>
+    <div>
+      <div id="fall-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
+      <div id="winter-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
+    </div>
+  </body>
+</html>
