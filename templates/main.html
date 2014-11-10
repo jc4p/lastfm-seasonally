@@ -15,7 +15,7 @@
         var options = {
           title: 'Spring',
           pieSliceText: 'label',
-          legend: 'none'
+          pieHole: 0.4,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('spring-piechart'));
@@ -58,12 +58,12 @@
   </head>
   <body>
     <div>
-      <div id="spring-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
-      <div id="summer-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
+      <div id="spring-piechart" style="width: 600px; height: 600px; display: inline-block"></div>
+      <div id="summer-piechart" style="width: 600px; height: 600px; display: inline-block"></div>
     </div>
     <div>
-      <div id="fall-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
-      <div id="winter-piechart" style="width: 500px; height: 500px; display: inline-block"></div>
+      <div id="fall-piechart" style="width: 600px; height: 600px; display: inline-block"></div>
+      <div id="winter-piechart" style="width: 600px; height: 600px; display: inline-block"></div>
     </div>
   </body>
 </html>
