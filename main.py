@@ -76,6 +76,8 @@ def get_user_tracks(username):
     body = json.loads(req.text)
 
     if 'recentracks' not in body:
+        print req.text
+        print "Returning null"
         return []
 
     for track in body['recenttracks']['track']:
