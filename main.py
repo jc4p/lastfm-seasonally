@@ -18,10 +18,10 @@ POOL_SIZE = 10
 
 @app.route("/")
 def home():
-    return "Visit /your-username/ -- Might take ~30 seconds to load if you have a lot of history."
+    return "Visit /user/your-username/ -- Might take ~30 seconds to load if you have a lot of history."
 
-@app.route("/<username>/")
-@app.route("/<username>")
+@app.route("/user/<username>/")
+@app.route("/user/<username>")
 def details(username=None):
     songs = get_user_tracks(username)
     spring_freq = get_artist_frequency(get_songs_for_spring(songs))
