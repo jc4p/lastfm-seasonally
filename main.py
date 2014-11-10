@@ -71,14 +71,11 @@ def get_user_tracks(username):
     # Ignore that this is the same as the method below, I need to
     # access the request object for the max page count too.
     url = BASE_URL.format(username, "1")
-    print url
 
     req = requests.get(url)
     body = json.loads(req.text)
 
-    if 'recentracks' not in body:
-        print req.text
-        print "Returning null"
+    if 'recenttracks' not in body:
         return []
 
     for track in body['recenttracks']['track']:
@@ -104,12 +101,10 @@ def get_user_tracks(username):
     return songs
 
 def get_user_tracks_for_pages(d): #username, page_start, page_end):
-    print d
     username = d[0]
 
     songs = []
     for page in range(d[1], d[2] + 1):
-        print "getting page {}".format(page)
         url = BASE_URL.format(username, str(page))
 
         req = requests.get(url)
