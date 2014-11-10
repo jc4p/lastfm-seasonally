@@ -71,6 +71,7 @@ def get_user_tracks(username):
     # Ignore that this is the same as the method below, I need to
     # access the request object for the max page count too.
     url = BASE_URL.format(username, "1")
+    print url
 
     req = requests.get(url)
     body = json.loads(req.text)
