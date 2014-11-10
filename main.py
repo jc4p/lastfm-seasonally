@@ -111,7 +111,7 @@ def get_user_tracks_for_pages(d): #username, page_start, page_end):
         body = json.loads(req.text)
 
         if 'recenttracks' not in body or 'track' not in body['recenttracks']:
-            break
+            continue
 
         for track in body['recenttracks']['track']:
             songs.append(track)
