@@ -12,7 +12,7 @@ app.debug = True
 
 cache = FileSystemCache("cache")
 BASE_URL = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&api_key=e62251fbec82fa75fa8c9a0ed17c5c17&format=json&limit=200&user={}&page={}"
-MAX_PAGES_EVER = 250
+MAX_PAGES_EVER = 400
 POOL_SIZE = 10
 
 @app.route("/")
@@ -57,7 +57,7 @@ def get_songs_for_winter(songs):
     return get_songs_for_season(songs, range(0, 80) + range(356, 365))
 
 def get_songs_for_season(songs, season_days):
-    return [s for s in songs if datetime.utcfromtimestamp(float(s['date']['uts'])).timetuple().tm_yday in season_days]
+    return [s for s in songs if 'date' in s and datetime.utcfromtimestamp(float(s['date']['uts'])).timetuple().tm_yday in season_days]
 
 def get_user_tracks(username):
     cached_value = cache.get(username)
@@ -73,6 +73,9 @@ def get_user_tracks(username):
 
     req = requests.get(url)
     body = json.loads(req.text)
+
+    if 'recentracks' not in body:
+        return []
 
     for track in body['recenttracks']['track']:
         songs.append(track)
