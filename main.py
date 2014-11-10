@@ -1,5 +1,6 @@
 from werkzeug.contrib.cache import FileSystemCache
 from flask import Flask, render_template
+import os
 
 import requests
 import json
@@ -17,7 +18,7 @@ POOL_SIZE = 10
 
 @app.route("/")
 def home():
-    return "Visit /your-username/"
+    return "Visit /your-username/ -- Might take ~30 seconds to load if you have a lot of history."
 
 @app.route("/<username>/")
 @app.route("/<username>")
@@ -143,4 +144,5 @@ def get_artist_frequency(songs):
     return freqs
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
